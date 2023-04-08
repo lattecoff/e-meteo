@@ -5,11 +5,16 @@ import requests
 def index(request):
 	ow_key = "39a0b9b82fed0bd13d95774fb4374965"
 	city = "Minsk"
-	url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid=" + ow_key
+	url = "https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=" + ow_key
 
-	
-	resp = requests.get(url.format(city))
+	resp = requests.get(url.format(city)).json()
 
-	print(resp.text)
+	city_info = {
+		"city": city,
+		"temp": resp["main"]["temp"],
+		"icon": resp["weather"][0]["icon"]
+	}
 
-	return render(request, "main/index.html")
+	context = {"info": city_info}
+
+	return render(request, "main/index.html", context)
