@@ -31,14 +31,18 @@
 		<div class="container mt-5">
 			<div row="row">
 				<div class="col-5 offset-1">
-					<form action="">
+					<form action="" method="post">
+						{% csrf_token %}
 						<label for="city">City</label>
-						<input type="text" id="city" class="form-control" name="city" placeholder="Input name city">
-						<input type="submit" name="send" value="Get info" class="mt-2 btn btn-danger">
+						{{ form.name }}
+						<input type="submit" name="send" value="learn" class="mt-2 btn btn-danger">
 					</form>
 
 					<div class="col-4 offset-1">
 						<h1>Information</h1>
+
+						{% for info in all_info %}	
+
 						<div class="alert alert-info">
 							<div class="row">
 								<div class="col-9">
@@ -50,6 +54,9 @@
 								</div>
 							</div>
 						</div>
+
+						{% endfor %}
+
 					</div>
 				</div>
 			</div>
